@@ -47,7 +47,8 @@ export class AppController {
   @Post('/upload/url')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFileToS3(@UploadedFile() file: Express.Multer.File): Promise<string> {
-    const bucketName = 'your-bucket-name'; // Replace with your actual bucket name
+
+    const bucketName = process.env.S3_APP_BUCKET; // Replace with your actual bucket name
 
     return this.S3Service.uploadFile(file, bucketName);
   }
